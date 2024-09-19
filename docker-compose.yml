@@ -1,0 +1,46 @@
+version: "3.2"
+services:
+  nginx:
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/var/www
+    environment:
+      DB_PORT: 3306
+      DB_HOST: mysql
+      XDG_CONFIG_HOME: /app
+    ports:
+      - "8080:80"
+    links:
+      - php-fpm
+    container_name: nginx
+
+  php-fpm:
+    build:
+      context: ./docker/php-fpm
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/var/www
+    environment:
+      DB_PORT: 3306
+      DB_HOST: mysql
+    links:
+      - mysql
+    container_name: php-fpm
+
+  mysql:
+    image: mysql
+    volumes:
+      - database:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret_pw
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: secret
+      MYSQL_DATABASE: library
+    ports:
+      - "33061:3306"
+    container_name: mysql
+
+volumes:
+  database:
