@@ -55,6 +55,18 @@ class m240918_183103_create_junction_table_for_authors_and_books_tables extends 
             'id',
             'CASCADE'
         );
+
+        $this->batchInsert('{{%authors_books}}', ['author_id', 'book_id'], [
+            [4,13],
+            [4,14],
+            [5,10],
+            [5,11],
+            [6,15],
+            [6,16],
+            [6,17],
+            [7,12],
+            [8,12]
+        ]);
     }
 
     /**
