@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%authors}}`.
  */
-class m240918_183107_create_authors_table extends Migration
+class m240918_183102_create_authors_table extends Migration
 {
     /**
      * {@inheritdoc}
